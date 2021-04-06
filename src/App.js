@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import {HomePage} from "./pages/homePage/HomePage";
 
 class App extends Component {
   render() {
-    return <div className='App'>Hello World To Nasrin</div>;
+    return <div>Hello World To<HomePage/></div>;
   }
 }
 
