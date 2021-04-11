@@ -32,14 +32,17 @@ class Signin extends React.Component{
                     <FormInput type="email" name="email" value={this.state.email} handleChange={this.handleChange} required label="Email"/>
                     <FormInput type="password" name="password" value={this.state.password} handleChange={this.handleChange} required label="password"/>
 
-                    <CustomButton type="submit">
-                        Signin
-                    </CustomButton>
-                    <CustomButton onClick={(event) => {event.preventDefault();
-                    signinWidthGoogle();
-                    }}>
-                        Signin with google
-                    </CustomButton>
+                    <div className="buttons">
+                        <CustomButton type="submit">
+                            Signin
+                        </CustomButton>
+                        <CustomButton isGoogleSignin onClick={(event) => {event.preventDefault();
+                            signinWidthGoogle();
+                        }}>
+                            Signin with google
+                        </CustomButton>
+                    </div>
+
                 </form>
             </div>
         )
