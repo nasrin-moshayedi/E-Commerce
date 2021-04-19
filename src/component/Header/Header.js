@@ -6,7 +6,6 @@ import {auth} from "./../../Firebase/firebase.utils";
 import "./header.styles.scss";
 
 const Header = ({currentUser}) => {
-    console.log(currentUser)
     return (
             <div className="header">
                 <Link to={"/"}>
