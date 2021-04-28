@@ -2,7 +2,7 @@ import React from "react";
 import FormInput from "./../FormInput/FormInput";
 import CustomButton from "./../CustomButton/CustomButton";
 import "./Signin.styles.scss";
-import { signinWidthGoogle } from "./../../Firebase/firebase.utils";
+import {auth, signinWidthGoogle } from "./../../Firebase/firebase.utils";
 
 class Signin extends React.Component{
     constructor(props) {
@@ -13,14 +13,23 @@ class Signin extends React.Component{
         }
     }
     handleChange = (e) => {
-        const {value, name} = e.target;
-        console.log(name , value)
-        this.setState({[name]: value});
+        e.persist();
+        const {name} = e.target;
+        // console.log(name , value)
+        this.setState({[name]: e.target.value});
+        console.log(this.state, "sdfsd", e)
     }
-    handleSubmit = (e) => {
+    handleSubmit = async e => {
         e.preventDefault();
-        // this.setState(({email: "", password: ""}));
+        const { email, password } = this.state;
         console.log(this.state)
+        try {
+            console.log("SDFsdf")
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({email: "", password : ""})
+        } catch (e) {
+            console.log(e.message, this.state)
+        }
     }
     render() {
         return(
@@ -33,7 +42,7 @@ class Signin extends React.Component{
                     <FormInput type="password" name="password" value={this.state.password} handleChange={this.handleChange} required label="password"/>
 
                     <div className="buttons">
-                        <CustomButton type="submit">
+                        <CustomButton type="submit" onClick={this.handleSubmit}>
                             Signin
                         </CustomButton>
                         <CustomButton isGoogleSignin onClick={(event) => {event.preventDefault();
